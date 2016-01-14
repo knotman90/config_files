@@ -10,5 +10,5 @@ tmux ls = list all the session currently running
   prints something like 
      0: 2 windows (created Thu Jan 14 09:53:35 2016) [173x49] 
      1: 3 windows (created Thu Jan 14 08:52:25 2016) [174x455] 
-tmux attach <number> 
+tmux attach -t <number> 
   restore the session number <number>
