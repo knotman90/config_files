@@ -12,3 +12,5 @@ tmux ls = list all the session currently running
      1: 3 windows (created Thu Jan 14 08:52:25 2016) [174x455] 
 tmux attach -t <number> 
   restore the session number <number>
+tmux kill-session -t <number>
+  kIlls a session (cannot be attached anymore)
