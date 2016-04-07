@@ -70,8 +70,6 @@ echo -e "
  $COLOR_COLUMN- Swap in use$RESET_COLORS.........: $COLOR_VALUE $SWAP (total-used-free) MB $RESET_COLORS
  $COLOR_COLUMN- Processes$RESET_COLORS...........: $COLOR_VALUE $PSA running $RESET_COLORS
  $COLOR_COLUMN- System uptime$RESET_COLORS.......: $COLOR_VALUE $upDays days $upHours hours $upMins minutes $upSecs seconds $RESET_COLORS
- $COLOR_COLUMN- Disk space ROOT$RESET_COLORS.....: $COLOR_VALUE $ROOT remaining $RESET_COLORS
  $COLOR_COLUMN- Disk space HOME$RESET_COLORS.....: $COLOR_VALUE $HOME remaining $RESET_COLORS
- $COLOR_COLUMN- Disk space BACK$RESET_COLORS.....: $COLOR_VALUE $BACKUP remaining $RESET_COLORS
 ===========================================================================
 "
