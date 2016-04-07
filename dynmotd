@@ -17,12 +17,13 @@
 
 USER=`whoami`
 HOSTNAME=`uname -n`
+IP=`hostname -i`
 ROOT=`df -Ph | grep root | awk '{print $4}' | tr -d '\n'`
 HOME=`df -Ph | grep home | awk '{print $4}' | tr -d '\n'`
 BACKUP=`df -Ph | grep backup | awk '{print $4}' | tr -d '\n'`
 
-MEMORY1=`free -t -m | grep "buffers/cache" | awk '{print $3" MB";}'`
-MEMORY2=`free -t -m | grep "Mem" | awk '{print $2" MB";}'`
+MEMORY=`free -m | grep "Mem" | awk '{print $2,"-",$3,"-",$4}'`
+SWAP=`free -m | grep "Swap" | awk '{print $2,"-",$3,"-",$4}'`
 PSA=`ps -Afl | wc -l`
 
 # time of day
@@ -47,30 +48,30 @@ LOAD1=`cat /proc/loadavg | awk {'print $1'}`
 LOAD5=`cat /proc/loadavg | awk {'print $2'}`
 LOAD15=`cat /proc/loadavg | awk {'print $3'}`
 
-echo "
- _______  __   __  _______  _______  _______  __    _  _______  __   __  _______  _______  _______  _______ 
- |       ||  | |  ||   _   ||       ||       ||  |  | ||       ||  | |  ||       ||   _   ||       ||       |
- |       ||  |_|  ||  |_|  ||  _____||   _   ||   |_| ||       ||  |_|  ||   _   ||  |_|  ||_     _||    ___|
- |       ||       ||       || |_____ |  | |  ||       ||       ||       ||  | |  ||       |  |   |  |   |___ 
- |      _||       ||       ||_____  ||  |_|  ||  _    ||      _||       ||  |_|  ||       |  |   |  |    ___|
- |     |_ |   _   ||   _   | _____| ||       || | |   ||     |_ |   _   ||       ||   _   |  |   |  |   |___ 
- |_______||__| |__||__| |__||_______||_______||_|  |__||_______||__| |__||_______||__| |__|  |___|  |_______|
-Good $TIME $USER"
+echo ""
+echo -e "\e[7m--- GOOD $TIME $USER ----\e[0m"
+echo ""
+MESSAGE=`/usr/bin/fortune | /usr/bin/cowsay`
+echo -e " $MESSAGE"
 
-echo "
+COLOR_COLUMN="\e[1m-"
+COLOR_VALUE="\e[31m"
+RESET_COLORS="\e[0m"
+echo -e "
 ===========================================================================
- - Hostname............: $HOSTNAME
- - Release.............: `cat /etc/redhat-release`
- - Users...............: Currently `users | wc -w` user(s) logged on
-===========================================================================
- - Current user........: $USER
- - CPU usage...........: $LOAD1, $LOAD5, $LOAD15 (1, 5, 15 min)
- - Memory used.........: $MEMORY1 / $MEMORY2
- - Swap in use.........: `free -m | tail -n 1 | awk '{print $3}'` MB
- - Processes...........: $PSA running
- - System uptime.......: $upDays days $upHours hours $upMins minutes $upSecs seconds
- - Disk space ROOT.....: $ROOT remaining
- - Disk space HOME.....: $HOME remaining
- - Disk space BACK.....: $BACKUP remaining
+ $COLOR_COLUMN- Hostname$RESET_COLORS............: $COLOR_VALUE $HOSTNAME $RESET_COLORS
+ $COLOR_COLUMN- IP Address$RESET_COLORS..........: $COLOR_VALUE $IP $RESET_COLORS
+ $COLOR_COLUMN- Release$RESET_COLORS.............: $COLOR_VALUE `cat /etc/redhat-release` $RESET_COLORS
+ $COLOR_COLUMN- Users$RESET_COLORS...............: $COLOR_VALUE Currently `users | wc -w` user(s) logged on $RESET_COLORS
+=========================================================================== $RESET_COLORS
+ $COLOR_COLUMN- Current user$RESET_COLORS........: $COLOR_VALUE $USER $RESET_COLORS
+ $COLOR_COLUMN- CPU usage$RESET_COLORS...........: $COLOR_VALUE $LOAD1 - $LOAD5 - $LOAD15 (1-5-15 min) $RESET_COLORS
+ $COLOR_COLUMN- Memory used$RESET_COLORS.........: $COLOR_VALUE $MEMORY (total-free-used) $RESET_COLORS
+ $COLOR_COLUMN- Swap in use$RESET_COLORS.........: $COLOR_VALUE $SWAP (total-used-free) MB $RESET_COLORS
+ $COLOR_COLUMN- Processes$RESET_COLORS...........: $COLOR_VALUE $PSA running $RESET_COLORS
+ $COLOR_COLUMN- System uptime$RESET_COLORS.......: $COLOR_VALUE $upDays days $upHours hours $upMins minutes $upSecs seconds $RESET_COLORS
+ $COLOR_COLUMN- Disk space ROOT$RESET_COLORS.....: $COLOR_VALUE $ROOT remaining $RESET_COLORS
+ $COLOR_COLUMN- Disk space HOME$RESET_COLORS.....: $COLOR_VALUE $HOME remaining $RESET_COLORS
+ $COLOR_COLUMN- Disk space BACK$RESET_COLORS.....: $COLOR_VALUE $BACKUP remaining $RESET_COLORS
 ===========================================================================
 "
