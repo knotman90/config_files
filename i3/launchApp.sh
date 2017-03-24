@@ -35,14 +35,5 @@ StartProg()
 # |__________|__________|
 
 
-StartProg google-chrome
-i3-msg split h
-sleep 5
-
-StartProg xterm
-i3-msg split v
-sleep 2
-
-
 
 exit 0
