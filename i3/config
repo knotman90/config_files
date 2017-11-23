@@ -164,7 +164,7 @@ client.urgent #d33682 #d33682 #fdf6e3 #dc322f
 
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-for_window [class=.*] border normal
+for_window [class=.*] border pixel 3
 
 # Hide borders
 hide_edge_borders none
@@ -180,12 +180,18 @@ font pango:DejaVu Sans Regular 10
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        font pango:DejaVu Sans Regular 10
-        status_command i3status -c ~/git/config_files/i3/.i3status.conf
-        position bottom
-        # font pango:DejaVu Sans Mono 10
-        
+#bar {
+#        font pango:DejaVu Sans Regular 10
+#        status_command i3status -c ~/git/config_files/i3/.i3status.conf
+#        position bottom
+#        # font pango:DejaVu Sans Mono 10
+#}
+
+bar{
+
+  status_command python ~/git/config_files/i3/i3_py_status.py
+  position bottom
+  font pango:DejaVu Sans Regular 9
 }
 
 # exit i3
@@ -208,9 +214,9 @@ bindsym $mod+Shift+x mode "$mode_system"
 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
 
 # Alsamixer
@@ -241,3 +247,11 @@ bindsym XF86AudioPrev exec playerctl previous
 
 #nm-applet
 exec --no-startup-id nm-applet
+
+
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
