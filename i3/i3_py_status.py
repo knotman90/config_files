@@ -1,8 +1,6 @@
 #sudo pip3 install git+https://github.com/enkore/i3pystatus.git
 #sudo pip3 install psutil netifaces  basiciw
 
-
-
 from i3pystatus import Status
 
 status = Status()
@@ -11,15 +9,15 @@ status = Status()
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
-    format=" %a %-d %b  %X",)
+    format="%a %-d %b  %X",)
 
 # Shows the average load of the last minute and the last 5 minutes
 # (the default value for format is used)
 status.register("load",
-    format=" {avg1}-{avg15}",)
+    format="{avg1}-{avg15}",)
 #show cpu usage
 status.register("cpu_usage",
-    format=" {usage:02}% "
+    format="{usage:02}% "
     )
 status.register("mem",
     divisor=1024**3,
@@ -86,20 +84,20 @@ status.register("network",
     #graph_style="braille-fill",
     graph_style="blocks",
     dynamic_color=False,
-    format_up=" {v4} {network_graph_recv} {bytes_sent:03}up/{bytes_recv:04}dw KB/s",)
+    format_up="{v4} {network_graph_recv} {bytes_sent:03}up/{bytes_recv:04}dw KB/s",)
 
 # Note: requires both netifaces and basiciw (for essid and quality)
 status.register("network",
     interface="wlp61s0",
     #format_up=" {essid} {quality:03.0f}%",)
-    format_up=" {essid} {quality:03.0f}%- {bytes_sent:03}up/{bytes_recv:04}dw KB/s",)
+    format_up="{essid} {quality:03.0f}%- {bytes_sent:03}up/{bytes_recv:04}dw KB/s",)
 
 # Shows disk usage of /
 # Format:
 # 42/128G [86G]
 status.register("disk",
     path="/",
-    format="⛁ {avail}G",
+    format="⛁{avail}G",
     #format="{used}/{total}G [{avail}G]",
     )
 
@@ -107,7 +105,7 @@ status.register("disk",
 #
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
-    format="♪ {volume}",)
+    format="♪{volume}",)
 
 # Shows mpd status
 # Format:
