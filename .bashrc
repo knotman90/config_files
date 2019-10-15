@@ -17,3 +17,9 @@ export LD_LIBRARY_PATH=:/home/knotman/git/opencal/OpenCAL++-Py/lib
 
 alias mutt="cd ~/mails && mutt"
 alias l="ls -lah"
+
+
+export HISTTIMEFORMAT="%d/%m/%y %T "
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+shopt -s histappend
