@@ -23,3 +23,11 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
+
+function hist(){
+    if [[ -z $1 ]] ; then
+        command history
+    else
+        command history | grep -E --color=auto "$@"
+    fi   
+}
